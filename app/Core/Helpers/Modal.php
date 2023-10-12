@@ -287,7 +287,7 @@ class Modal{
 	
 	public function format($number = 0, $show_currency=true){
 		if($show_currency){
-			return number_format($number,2,",",".")." Dh";
+			return number_format((int)$number,2,",",".")." Dh";
 		}else{
 			return number_format($number,2,",",".");
 		}

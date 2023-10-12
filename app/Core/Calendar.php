@@ -277,7 +277,7 @@ class Calendar extends Modal{
 				$tr .= '<tr height="35px">';
 				for($i=1; $i<=($days_in_month*2); $i++){
 				
-					if( ($i/2) % 2 == 0 )
+					if( (int)($i/2) % 2 == 0 )
 						if( $i % 2 == 0 )
 							$tr .= '<td colspan="2" class="'.$td_style.'"></td>';
 						else
