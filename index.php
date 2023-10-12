@@ -1,7 +1,7 @@
 <?php
 session_start();
 /*
-print_r(scandir(session_save_path()));
+print_r(scandir(session_save_path()));  
 */
 $host_dev = "localhost/apps/cabosand/";
 $host_prod = $_SERVER['SERVER_NAME'] . "/";
