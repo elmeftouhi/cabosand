@@ -340,13 +340,21 @@ class Caisse extends Modal{
 		$push['Obj']	=	new Caisse;
 		$push['id_caisse'] = $params['id_caisse'];
 		
-		$mouvements = $this->find('', [ 'conditions'=>[ 'id_caisse='=>$params['id_caisse'] ], 'order'=>'created DESC' ], 'caisse_alimentation');		
+		$conditions = [ 'id_caisse='=>$params['id_caisse'] ];
+
+		$mouvements = $this->find('', [ 'conditions AND'=> $conditions, 'order'=>'created DESC' ], 'caisse_alimentation');		
 		if( count($mouvements) > 0 ){
 			$push['mouvements'] = $mouvements;
 		}else{
 			$push['mouvements'] = [];
 		}
-		
+
+		$total = 0;
+
+		foreach($mouvements as $m){
+			$total = $total + $m["montant"];
+		}
+		$push["total"] = $this->format($total);
 		
 		$view = new View("caisse.mouvement");
 		return $view->render($push);

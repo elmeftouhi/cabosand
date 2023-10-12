@@ -1,6 +1,6 @@
 <?php
 $core = $_SESSION["CORE"];
-$start_year = 2020;
+$start_year = 2018;
 $this_year = date("Y");
 $months = [
 	1	=>	'Janvier',
@@ -19,7 +19,7 @@ $months = [
 ?>
 
 
-<div id="popup" style="width: 550px">	
+<div id="popup" style="width: 650px">	
 
 	<div class="popup-header d-flex space-between">
 		<div class="">Alimentation Caisse</div>
@@ -40,12 +40,12 @@ $months = [
 		
 		<div class="flex gap-4 justify-between items-center py-4">
 			<div class="flex flex-1 justify-start">
-				<input type="text" class="w-full" placeholder="chercher...">
+				<input id="mouvement__search" type="text" class="w-full" placeholder="chercher...">
 			</div>
 
 			<div class="flex justify-start gap-4">
 				<div class="">
-					<select>
+					<select id="mouvement__year">
 						<?php
 						for($i = $start_year; $i<=$this_year; $i++){
 						?>
@@ -54,7 +54,8 @@ $months = [
 					</select>
 				</div>
 				<div class="">
-					<select>
+					<select id="mouvement__month">
+						<option value="-1">All</option>
 						<?php
 						foreach($months as $k=>$m){
 							if($k == date('m'))
@@ -70,7 +71,15 @@ $months = [
 		</div>
 
 
-
+		<div class="flex justify-between pb-4">
+			<div class=" font-bold">
+				Nombre Opérations : [ <span class="mouvement_count"><?= count($mouvements) ?></span> ]
+			</div>
+			<div class="text-green font-bold">
+				Total : <span class="mouvement_total"><?= $total ?></span>
+			</div>
+		</div>
+			
 		<div class="items">
 			<div class="item d-flex space-between">
 				<div class="d-flex" style="flex: 1">
@@ -86,8 +95,8 @@ $months = [
 			?>
 			<div class="item d-flex space-between">
 				<div class="d-flex" style="flex: 1">
-					<div class="date"><?= $v["created"] ?></div>
-					<div class="source"><?= $v["source"] ?></div>
+					<div class="date"><?= explode(" ", $v["created"])[0] ?></div>
+					<div class="source pt-2"><?= $v["source"] ?></div>
 					<div class="notess"><?= $v["notes"] ?></div>
 					<div class="montant"><?= $Obj->format($v["montant"]) ?></div>
 				</div>
@@ -99,7 +108,7 @@ $months = [
 		</div>
 	</div>
 
-	<div class="popup-actions">
+	<div class="popup-actions hidden">
 		<ul>
 			<li><button class="abort">Quitter</button></li>
 		</ul>

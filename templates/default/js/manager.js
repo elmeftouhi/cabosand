@@ -1583,11 +1583,18 @@ $(document).ready(function(){
 	
 	$(document).on('click', '.refresh_mouvement', function(){
 		
+		var year = $("#mouvement__year").val()
+		var month = $("#mouvement__month").val()
+		var search = $("#mouvement__search").val()
+
 		var data = {
 			'controler'		:	'Caisse_Alimentation',
 			'function'		:	'Get',
 			'params'		:	{
-				'id_caisse'		:	$(this).val()
+				'id_caisse'		:	$(this).val(),
+				'year'			:	year,
+				'month'			:	month,
+				'search'		:	search
 			}
 		};
 		
@@ -1600,7 +1607,9 @@ $(document).ready(function(){
 			dataType	: 	"json",
 		}).done(function(response){
 			
-			$('.items').html(response.msg);
+			$('.items').html(response.msg['content']);
+			$('.mouvement_total').html(response.msg['total'])
+			$('.mouvement_count').html(response.msg['count'])
 			$("#preloader").remove();
 
 		}).fail(function(xhr) {
@@ -1644,7 +1653,15 @@ $(document).ready(function(){
 		
 	});
 	
-	
+	$(document).on('change', '#mouvement__search', function(){
+		$('.refresh_mouvement').trigger('click');
+	})
+	$(document).on('change', '#mouvement__year', function(){
+		$('.refresh_mouvement').trigger('click');
+	})
+	$(document).on('change', '#mouvement__month', function(){
+		$('.refresh_mouvement').trigger('click');
+	})
 	/****************
 				Propriete Location
 	****************/

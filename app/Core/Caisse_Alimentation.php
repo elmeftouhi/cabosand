@@ -239,11 +239,28 @@ class Caisse_Alimentation extends Modal{
 				<div class="" style="width: 55px"></div>
 			</div>';
 		
-		foreach( $this->find('', [ 'conditions'=> [ 'id_caisse='=>$params['id_caisse'] ], 'order'=>'created DESC' ], '') as $k=>$v){
+			$conditions = [ 'id_caisse='=>$params['id_caisse'] ];
+			if( isset($params['year']) ){
+				$conditions['YEAR(created)='] = $params['year'];
+			}
+			if( isset($params['month']) ){
+				if($params['month'] != "-1") $conditions['MONTH(created)='] = $params['month'];
+			}
+			if( isset($params['search']) ){
+				$conditions['LOWER(CONVERT(source USING latin1)) like'] = '%' . strtolower($params['search']) . '%';
+			}
+
+
+		$count = 0;
+		$total = 0;
+
+		foreach( $this->find('', [ 'conditions AND'=> $conditions, 'order'=>'created DESC' ], '') as $k=>$v){
+			$count++;
+			$total = $total + $v["montant"];
 			$template .= '
 				<div class="item d-flex space-between">
 					<div class="d-flex" style="flex: 1">
-						<div class="date">' . $v["created"] . '</div>
+						<div class="date">' . explode(" ", $v["created"])[0]  . '</div>
 						<div class="source">' . $v["source"]  . '</div>
 						<div class="notess">' .  $v["notes"]  . '</div>
 						<div class="montant">' . $this->format($v["montant"])  . '</div>
@@ -254,6 +271,11 @@ class Caisse_Alimentation extends Modal{
 				</div>
 			';			
 		}
+		return [
+			'content' 	=> 	$template,
+			'count'		=>	$count,
+			'total'		=>	$this->format($total)
+		];
 		return $template;
 
 	}
