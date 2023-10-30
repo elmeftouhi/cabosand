@@ -3,7 +3,7 @@ session_start();
 /*
 print_r(scandir(session_save_path()));  
 */
-$host_dev = "cabosand.dev.cisco.com/";
+$host_dev = "localhost/cabosand-2023/"; // "cabosand.dev.cisco.com/";
 $host_prod = $_SERVER['SERVER_NAME'] . "/";
 $envirenment = "CABOSAND-MANAGER";
 $D_S = DIRECTORY_SEPARATOR;
