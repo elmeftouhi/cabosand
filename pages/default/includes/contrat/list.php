@@ -20,12 +20,10 @@ $months = [
 	12	=>	'Décembre'
 ];
 
-$years = [
-	2019	=>	'2019',
-	2020	=>	'2020',
-	2021	=>	'2021',
-	2022	=>	'2022'
-];
+$years = [];
+for($year = 2019; $year<=date("Y"); $year++){
+	$years[$year] = $year;
+}
 
 $status = [ ['id'=>0, 'label'=>'Archivé'], ['id'=>1, 'label'=>'Activé'] ];
 

@@ -19,7 +19,19 @@ if(isset($depense)){
 
 	<div class="popup-content">
 		<div id="depense" class="">
-			
+			<div class="flex item-center ml-16 mb-4 pl-1">
+				<label class="switch">
+					<?php if(isset($propriete)){ ?>
+							<input class="field" id="id_propriete" data-id="<?= $propriete["id"] ?>" type="checkbox" value="" checked>
+					<?php }else{ ?>
+							<input class="field" id="id_propriete" data-id="0" type="checkbox" value="">
+					<?php } ?>
+					<span class="slider round"></span>
+				</label>
+				<div class="uppercase font-bold pl-2 text-green-800">
+					à remboursser
+				</div>
+			</div>
 			<div class="form-element inline">
 				<label for="date_depense">Date</label>
 				<input id="date_depense" type="date" value="<?= isset($depense)? $depense["date_depense"]: date('Y-m-d'); ?>" class="field required">
@@ -59,7 +71,7 @@ if(isset($depense)){
 			</div>
 			<div class="form-element inline">
 				<label for="libelle">Libellé</label>
-				<input type="text" id="libelle" value="<?= isset($depense)? $depense["libelle"]: "" ?>" class="required field">
+				<textarea id="libelle" class="required field"><?= isset($depense)? $depense["libelle"]: "" ?></textarea>
 			</div>
 			<div class="form-element inline">
 				<label for="montant">Montant</label>

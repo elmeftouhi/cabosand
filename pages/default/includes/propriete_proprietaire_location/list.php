@@ -20,10 +20,10 @@ $months = [
 	12	=>	'Décembre'
 ];
 
-$years = [
-	2019	=>	'2019',
-	2020	=>	'2020'
-];
+$years = [];
+for($year = 2019; $year<=date("Y"); $year++){
+	$years[$year] = $year;
+}
 
 $tags = [
 	[ 'hide'=>'', 'id'=>'code', 'label' => 'Code'],
