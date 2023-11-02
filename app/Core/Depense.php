@@ -562,7 +562,7 @@ class Depense extends Modal{
 			}elseif($column['column'] === "created"){
 				$trs_counter += $is_display === "hide"? 0:1;
 				$ths .= "<th>";
-				$ths .=  "	<label class='d-flex gap-2'>";
+				$ths .=  "	<label class='flex gap-2 items-center'>";
 				$ths .=  "		<input type='checkbox' class='selectAllRows'>";
 				$ths .=  		$column['label'];
 				$ths .=  "	</label>";
@@ -673,15 +673,21 @@ class Depense extends Modal{
 		
 		foreach($data as $k=>$v){
 			
-			$background = isset($v["all_ligne"])? $v["all_ligne"]? $v["hex_string"]: "": "";
-			$trs .= '<tr class="" style="background-color:'.$background.'" data-page="'.$use.'">';
+			//$background = isset($v["all_ligne"])? $v["all_ligne"]? $v["hex_string"]: "": "";
+			$class = $v["is_recover"]? "bg-green-200": "";
+
+			$trs .= '<tr class="'.$class.'" data-page="'.$use.'">';
 			foreach($columns as $key=>$value){
 				
 				$style = (!$columns[$key]["display"])? "display:none": $columns[$key]["style"] ;
 				$is_display = (!$columns[$key]["display"])? "hide": "" ;
 
 				if(isset($v[ $columns[$key]["column"] ])){
-					if($columns[$key]["column"] == "name"){
+					if($columns[$key]["column"] == "libelle"){
+						$icon = '<span class="pl-2 text-green-600" style="font-size:14px"><i class="fa fa-refresh" aria-hidden="true"></i></span>';
+						$icon = $v["is_recover"]? $icon: "";
+						$trs .= "<td>" . $v[$columns[$key]["column"]] . " " . $icon. "</td>";
+					}elseif($columns[$key]["column"] == "name"){
 						$code = $v["code"] === ""? "": "<div style='font-size:10px; font-weight:bold'>" . $v["code"] . "</div>";
 						$complexe = $v["name"] === ""? "": $v["name"] . $code;
 						$trs .= "<td class='".$is_display."' style='".$style."'>" . $complexe . "</td>";
@@ -697,7 +703,7 @@ class Depense extends Modal{
 							}else if($columns[$key]["format"] === "date"){
 								$date = explode(" ", $v[ $columns[$key]["column"] ]);
 								if(count($date)>1){
-									$_date = "<label style='min-width:105px'><input value='".$v["id"]."' class='selectThisRow' type='checkbox'> ".$date[0]."</label>";
+									$_date = "<label class='flex gap-2 items-center cursor-pointer hover:text-green-800' style='min-width:105px'><input value='".$v["id"]."' class='selectThisRow' type='checkbox'> ".$date[0]."</label>";
 								}else{
 									$_date = "<div><i class='fas fa-calendar-alt'></i> ".$date[0]."</div>";
 								}

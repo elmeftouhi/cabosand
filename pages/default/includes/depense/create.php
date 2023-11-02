@@ -19,17 +19,17 @@ if(isset($depense)){
 
 	<div class="popup-content">
 		<div id="depense" class="">
-			<div class="flex item-center ml-16 mb-4 pl-1">
+			<div class="flex item-center ml-16 mb-4 pl-1 bg-green-100 rounded p-1">
 				<label class="switch">
-					<?php if(isset($propriete)){ ?>
-							<input class="field" id="id_propriete" data-id="<?= $propriete["id"] ?>" type="checkbox" value="" checked>
+					<?php if(isset($depense)){ ?>
+							<input class="field" id="is_recover" <?= $depense["is_recover"]? "checked": "" ?>  type="checkbox" value="">
 					<?php }else{ ?>
-							<input class="field" id="id_propriete" data-id="0" type="checkbox" value="">
+							<input class="field" id="is_recover" data-id="0" type="checkbox" value="">
 					<?php } ?>
 					<span class="slider round"></span>
 				</label>
 				<div class="uppercase font-bold pl-2 text-green-800">
-					à remboursser
+					à remboursser <?= $depense["is_recover"] ?> --
 				</div>
 			</div>
 			<div class="form-element inline">
