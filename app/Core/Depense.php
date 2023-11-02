@@ -674,9 +674,9 @@ class Depense extends Modal{
 		foreach($data as $k=>$v){
 			
 			//$background = isset($v["all_ligne"])? $v["all_ligne"]? $v["hex_string"]: "": "";
-			$class = $v["is_recover"]? "bg-green-200": "";
+			$class = $v["is_recover"]? "background-color:#A2F390": "";
 
-			$trs .= '<tr class="'.$class.'" data-page="'.$use.'">';
+			$trs .= '<tr style="'.$class.'" data-page="'.$use.'">';
 			foreach($columns as $key=>$value){
 				
 				$style = (!$columns[$key]["display"])? "display:none": $columns[$key]["style"] ;
@@ -860,6 +860,7 @@ class Depense extends Modal{
 			'created_by'		=>	$created_by,
 			'updated'			=>	$created,
 			'date_depense'		=>	$params['columns']['date_depense'],
+			'is_recover'		=>	$params['columns']['is_recover'],
 			'id_caisse'			=>	$params['columns']['depense_caisse'],
 			'id_propriete'		=>	$params['columns']['id_propriete'],
 			'id_category'		=>	$params['columns']['depense_category'],

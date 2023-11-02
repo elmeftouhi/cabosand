@@ -29,7 +29,7 @@ if(isset($depense)){
 					<span class="slider round"></span>
 				</label>
 				<div class="uppercase font-bold pl-2 text-green-800">
-					à remboursser <?= $depense["is_recover"] ?> --
+					à remboursser
 				</div>
 			</div>
 			<div class="form-element inline">
